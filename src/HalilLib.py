@@ -1,2 +1,0 @@
-print('halil')
-print('HalilBranchGelistirildi')

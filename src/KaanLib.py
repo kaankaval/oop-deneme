@@ -1,2 +1,0 @@
-print('kaan')
-print('KaanBranchGelistirme')

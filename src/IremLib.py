@@ -1,2 +1,0 @@
-print('irem')
-print('IremBranchGelistirildi')
