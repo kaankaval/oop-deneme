@@ -1,49 +1,39 @@
 import cv2
 import numpy as np
-
+from copy import deepcopy
+from src.image import Image
 
 class Video:
-    def __init__(self,path):
-        self.__path = path
-        self.__video = cv2.VideoCapture(path)
+    def __init__(self):
+        self.__path = None
+        self.__vid = None
         self.__frame = None
-        self.__algorithm = []
+        self.__original = None
+        self.__image = Image()
 
-    #set video capture
-    def set(self,video_set):
-        self.__algorithm.append('set')
-        self.__video = video_set
+    def path(self,video_path):
+        self.__path = video_path
+        self.__vid = cv2.VideoCapture(self.__path)
         return self
 
-    # set video capture
-    def frame_set(self, frameset):
-        self.__algorithm.append('frameset')
-        self.__frame = frameset
+    def set(self,frame):
+        self.__frame = deepcopy(frame)
+        self.__original = deepcopy(frame)
         return self
 
-    #get video capture
     def get(self):
-        self.__algorithm.append('get')
-        return self.__video
+        return self.__frame
 
-    def width(self):
-        self.__algorithm.append('width')
-        width = int(self.__video.get(3))
-        return width
+    def original(self):
+        return self.__original
 
-    def height(self):
-        self.__algorithm.append('heigth')
-        height = int(self.__video.get(4))
-        return height
-
-    #read video frame
-    def from_read(self):
-        self.__algorithm.append('read')
-        ret, self.__frame = self.__video.read()
-        return ret, self.__frame
-
-    #release video capture
-    def release(self):
-        self.__algorithm.append('release')
-        self.__video.release()
+    def read(self):
+        self.__frame = self.__vid.read()[1]
+        self.__original = deepcopy(self.__frame)
         return self
+
+    def image(self):
+        self.__image.set(self.__frame)
+
+        return self.__image
+

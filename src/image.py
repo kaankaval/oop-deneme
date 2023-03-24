@@ -2,20 +2,21 @@ import cv2
 from copy import deepcopy
 import numpy as np
 
-from convert import Convert
-from contour import Contour
+from src.convert import Convert
+from src.contour import Contour
 
 
 class Image:
-    def __init__(self, path):
-        self.__path = path
-        self.__image = cv2.imread(path)
-        self.__original = deepcopy(self.__image)
+    def __init__(self):
+        self.__path = None
+        self.__image = None,
+        self.__original = None
         self.__algorithm = []
+        self.__algorithm.append('init')
 
-        self.__convert = Convert(self.__image)
-        self.__contour = Contour(self.__image)
-
+        self.__convert = None
+        self.__contour = None
+        self.__video = None
 
     # set image array
     def set(self, image_set):
@@ -28,18 +29,31 @@ class Image:
         self.__algorithm.append('get')
         return self.__image
 
-    def set_convert(self):
+    #get image path
+    def path(self,path):
+        self.__path = path
+        self.__image = cv2.imread(self.__path)
+        self.__original = deepcopy(self.__image)
+        return self
+
+    def convert(self):
+        if self.__convert is None:
+            self.__convert = Convert()
+        self.__convert.set(self.__image)
         return self.__convert
 
-    # def get_convert(self):
-    #     self.__image = self.__convert.get()
-    #     return self.__image
-
-    def set_contour(self):
+    def contour(self):
+        if self.__contour is None:
+            self.__contour = Contour(self.__image)
         return self.__contour
 
-    # def get_convert(self):
-    #     return self.__contour.get()
+    def return_video(self):
+        from src.video import Video
+        if self.__video is None:
+            self.__video = Video()
+        self.__video.set(self.__image)
+        return self.__video
+
 
     # ----------------------------------ImageOperations-------------------------------#
     # get image original array
@@ -50,14 +64,14 @@ class Image:
     # show image
     def show(self):
         cv2.imshow(self.__algorithm[-1], self.__image)
+        print('a')
         self.__algorithm.append('show')
         return self
 
     # wait for key
-    def wait(self):
+    def wait(self,milisecond=0):
         self.__algorithm.append('wait')
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        cv2.waitKey(milisecond)
         return self
 
     # get image weight

@@ -7,7 +7,8 @@ class Contour:
         self.__image = image
         self.__contours = None
         self.__hierarchy = None
-        self.iimage = None
+        self.__img = None
+        self.__algorithm = []
 
     def set(self, image):
         self.__image = image
@@ -68,7 +69,6 @@ class Contour:
                                              block_size, c)
         return self
 
-
     def find(self):
         self.__contours, self.__hierarchy = cv2.findContours(self.__image.get(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         return self
@@ -83,3 +83,10 @@ class Contour:
         cv2.drawContours(self.__image.original(), self.__contours, -1, color, thickness)
         self.__image.set(self.__image.original())
         return self
+
+    def return_image(self):
+        from src.image import Image
+        if self.__img is None:
+            self.__img = Image()
+        self.__img.set(self.__image)
+        return self.__img

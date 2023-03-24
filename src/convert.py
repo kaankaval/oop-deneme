@@ -1,16 +1,18 @@
 import cv2
-from image import image
+from copy import deepcopy
+
 
 class Convert:
-    def __init__(self,i=None):
-        self.__image = i
+    def __init__(self, im=None):
+        self.__image = im
         self.__converted = None
         self.__algorithm = []
+        self.__img = None
 
     # set image array
     def set(self, image_set):
         self.__algorithm.append('set')
-        self.__image = image_set
+        self.__image = deepcopy(image_set)
         return self
 
     # get image array
@@ -18,8 +20,14 @@ class Convert:
         self.__algorithm.append('get')
         return self.__converted
 
-    # ----------------------------------ColorSpaces-------------------------------#
+    def return_image(self):
+        from src.image import Image
+        if self.__img is None:
+            self.__img = Image()
+        self.__img.set(self.__converted)
+        return self.__img
 
+    # ----------------------------------ColorSpaces-------------------------------#
     # convert to gray
     def to_gray(self):
         self.__algorithm.append('to_gray')
