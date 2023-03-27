@@ -3,18 +3,9 @@ import cv2
 from src.image import Image
 from src.video import Video
 
-# img = Image()
-
-# img.show().wait()
-
-# img.path('assets/image/main.png').\
-#     convert().to_gray().return_image().\
-#     contour().to_canny().return_image().\
-#     show().wait()
-
 
 vid = Video()
-vid.path('assets/videos/test1_1602.avi')
+vid.path('assets/videos/test2103-0.avi')
 while True:
     vid.read().image().\
         convert().\

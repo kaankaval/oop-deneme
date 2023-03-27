@@ -2,6 +2,7 @@ import cv2
 from copy import deepcopy
 import numpy as np
 
+
 class Contour:
     def __init__(self, image=None):
         self.__image = image
@@ -16,7 +17,6 @@ class Contour:
 
     def get(self):
         return self.__image
-
 
     # to edge detection
     def to_canny(self, thr=[50, 150], a_size=3):

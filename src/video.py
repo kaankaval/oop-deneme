@@ -3,6 +3,7 @@ import numpy as np
 from copy import deepcopy
 from src.image import Image
 
+
 class Video:
     def __init__(self):
         self.__path = None

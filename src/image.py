@@ -1,7 +1,6 @@
 import cv2
 from copy import deepcopy
 import numpy as np
-
 from src.convert import Convert
 from src.contour import Contour
 
