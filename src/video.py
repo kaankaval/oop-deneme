@@ -35,6 +35,5 @@ class Video:
 
     def image(self):
         self.__image.set(self.__frame)
-
         return self.__image
 

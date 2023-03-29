@@ -7,7 +7,7 @@ class Convert:
         self.__image = im
         self.__converted = None
         self.__algorithm = []
-        self.__img = None
+        self._img = None
 
     # set image array
     def set(self, image_set):
@@ -22,10 +22,10 @@ class Convert:
 
     def return_image(self):
         from src.image import Image
-        if self.__img is None:
-            self.__img = Image()
-        self.__img.set(self.__converted)
-        return self.__img
+        if self._img is None:
+            self._img = Image()
+        self._img.set(self.__converted)
+        return self._img
 
     # ----------------------------------ColorSpaces-------------------------------#
     # convert to gray

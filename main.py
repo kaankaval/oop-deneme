@@ -11,12 +11,9 @@ while True:
         convert().\
         to_gray().\
         return_image().\
+        show(name = "Gray").\
         contour().to_canny().\
         return_image().\
-        show()
-
-    cv2.imshow('a',vid.get())
-    if cv2.waitKey(1) > 0 :
-        break
+        show().wait(20)
 
 cv2.destroyAllWindows()

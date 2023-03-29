@@ -44,6 +44,7 @@ class Image:
     def contour(self):
         if self.__contour is None:
             self.__contour = Contour(self.__image)
+        self.__contour.set(self.__image)
         return self.__contour
 
     def return_video(self):
@@ -61,16 +62,18 @@ class Image:
         return self.__original
 
     # show image
-    def show(self):
-        cv2.imshow(self.__algorithm[-1], self.__image)
-        print('a')
+    def show(self,name=None):
+        if name is None:
+            name = self.__algorithm[-1]
+        cv2.imshow(name, self.__image)
         self.__algorithm.append('show')
         return self
 
     # wait for key
-    def wait(self,milisecond=0):
+    def wait(self,milisecond=0,key = ord('q')):
         self.__algorithm.append('wait')
-        cv2.waitKey(milisecond)
+        if cv2.waitKey(milisecond) == key:
+
         return self
 
     # get image weight
