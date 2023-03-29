@@ -72,8 +72,7 @@ class Image:
     # wait for key
     def wait(self,milisecond=0,key = ord('q')):
         self.__algorithm.append('wait')
-        if cv2.waitKey(milisecond) == key:
-
+        cv2.waitKey(milisecond)
         return self
 
     # get image weight

@@ -14,6 +14,10 @@ while True:
         show(name = "Gray").\
         contour().to_canny().\
         return_image().\
-        show().wait(20)
+        show()
+
+    cv2.imshow('vid',vid.get())
+    if cv2.waitKey(20) == ord('q'):
+        break
 
 cv2.destroyAllWindows()
